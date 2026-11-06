@@ -1,4 +1,4 @@
-[2026-11-06 12:28:33] Smart Factory Alert Agent started
+[2026-11-07 00:30:25] Smart Factory Alert Agent started
 Input: data\sensor_data.csv
 Loaded 300 rows. Columns: ['timestamp', 'temp', 'pressure', 'vibration', 'label']
 Rows: 300

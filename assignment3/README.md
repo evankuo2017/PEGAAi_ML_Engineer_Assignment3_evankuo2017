@@ -1,6 +1,6 @@
 # Smart Factory Alert Agent (Assignment 3)
 
-智慧工廠設備異常警示 AI Agent：產生模擬感測器資料、清洗、規則式異常偵測、命令列警示輸出。Demo 截圖與技術報告位於專案外層的 `../report/` 資料夾。
+智慧工廠設備異常警示 AI Agent：產生模擬感測器資料、清洗、規則式異常偵測、命令列警示輸出。
 
 ## 專案結構
 
@@ -39,8 +39,18 @@ python generate_data.py
 # 2. 執行 Agent
 python main.py            # 預設 data/sensor_data.csv -> outputs/
 python main.py --input data/sensor_data.csv --output outputs --log outputs/run_log.txt
+python main.py --stream   # 串流模式：異常警示逐筆輸出（每筆間隔 0.3 秒）
 
 # 3. 執行測試
 python -m unittest discover -s tests
 ```
+
+## 參數說明（main.py）
+
+| 參數 | 預設值 | 說明 |
+|---|---|---|
+| `--input`, `-i` | `data/sensor_data.csv` | 感測器資料 CSV 路徑 |
+| `--output`, `-o` | `outputs` | 輸出資料夾（alerts.csv、run_log.txt） |
+| `--log` | `<output>/run_log.txt` | 執行記錄檔路徑 |
+| `--stream` | 關閉 | 串流模式：偵測完成後，將異常警示逐筆輸出、每筆間隔 0.3 秒，模擬即時警示推送；未加此參數時一次輸出全部警示 |
 

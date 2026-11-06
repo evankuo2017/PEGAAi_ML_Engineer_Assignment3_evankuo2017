@@ -1,7 +1,7 @@
 """Smart Factory Alert Agent - CLI orchestrator."""
 from __future__ import annotations
 import argparse
-import json
+import time
 from datetime import datetime
 from pathlib import Path
 from typing import Callable, Dict
@@ -15,6 +15,8 @@ except ImportError:
     from preprocessing import load_data, clean_data, cleaning_summary_to_text
     from detector import detect, anomalies_to_dataframe, summarize, compute_metrics
 
+
+STREAM_DELAY_SEC = 0.3  # delay between alerts in --stream mode
 
 # Simple tool registry to make the agent's perception/reasoning/action explicit.
 TOOLS: Dict[str, Callable] = {}
@@ -52,11 +54,12 @@ def save_results_tool(alerts_df, out_dir):
 
 
 class AlertAgent:
-    def __init__(self, input_path, output_dir="outputs", log_path=None):
+    def __init__(self, input_path, output_dir="outputs", log_path=None, stream=False):
         self.input_path = Path(input_path)
         self.output_dir = Path(output_dir)
         self.log_path = Path(log_path) if log_path else self.output_dir / "run_log.txt"
         self.log_lines = []
+        self.stream = stream
 
     def _log(self, msg):
         self.log_lines.append(msg)
@@ -86,6 +89,7 @@ class AlertAgent:
         self._log("\n=== Evaluation Metrics (vs. label) ===")
         self._log(f"TP={metrics['tp']}  FP={metrics['fp']}  FN={metrics['fn']}  TN={metrics['tn']}")
         self._log(f"Precision={metrics['precision']}  Recall={metrics['recall']}  F1={metrics['f1']}")
+
         alerts_df = anomalies_to_dataframe(results)
         self._log("\n=== Anomaly Alerts ===")
         if alerts_df.empty:
@@ -98,6 +102,8 @@ class AlertAgent:
                     f"vibration={r['vibration']}"
                 )
                 self._log(f"   -> {r['suggestions']}")
+                if self.stream:
+                    time.sleep(STREAM_DELAY_SEC)  # stream mode: emit alerts one by one
             csv_path = TOOLS["save_results"](alerts_df, str(self.output_dir))
             self._log(f"\nAlerts saved to: {csv_path}")
 
@@ -111,6 +117,7 @@ def build_arg_parser():
     p.add_argument("--input", "-i", default="data/sensor_data.csv", help="Path to sensor CSV")
     p.add_argument("--output", "-o", default="outputs", help="Output directory")
     p.add_argument("--log", default=None, help="Path to run log file")
+    p.add_argument("--stream", action="store_true", default=False, help="Stream sensor results one by one")
     return p
 
 
@@ -126,7 +133,7 @@ def main():
         args.output = str(PROJECT_ROOT / args.output)
         if args.log:
             args.log = str(PROJECT_ROOT / args.log)
-    agent = AlertAgent(args.input, args.output, args.log)
+    agent = AlertAgent(args.input, args.output, args.log, args.stream)
     agent.run()
 
 
