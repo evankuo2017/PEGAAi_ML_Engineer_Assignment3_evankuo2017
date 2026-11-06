@@ -1,0 +1,91 @@
+[2026-11-06 12:28:33] Smart Factory Alert Agent started
+Input: data\sensor_data.csv
+Loaded 300 rows. Columns: ['timestamp', 'temp', 'pressure', 'vibration', 'label']
+Rows: 300
+Missing values before cleaning:
+  - temp: 15
+  - pressure: 15
+  - vibration: 15
+Imputed values:
+  - temp: 15
+  - pressure: 15
+  - vibration: 15
+Missing values after cleaning:
+  - temp: 0
+  - pressure: 0
+  - vibration: 0
+
+=== Detection Summary ===
+Total records: 300
+Anomalies: 30 (10.0%)
+By severity: {'low': 1, 'medium': 10, 'high': 19}
+By sensor: {'temp': 18, 'pressure': 18, 'vibration': 15}
+Avg score: 85.87  Max score: 100.0
+
+=== Evaluation Metrics (vs. label) ===
+TP=30  FP=0  FN=0  TN=270
+Precision=1.0  Recall=1.0  F1=1.0
+
+=== Anomaly Alerts ===
+2024-06-03 21:00:00 | score=100.0 | severity=high | sensors=vibration | temp=46.3 pressure=1.05 vibration=0.13
+   -> Excessive vibration: inspect bearings/alignment.
+2024-06-03 21:05:00 | score=100.0 | severity=high | sensors=pressure,vibration | temp=45.5 pressure=0.93 vibration=0.09
+   -> Pressure too low: check pump/leaks. | Excessive vibration: inspect bearings/alignment.
+2024-06-03 21:15:00 | score=58.0 | severity=medium | sensors=pressure | temp=48.1 pressure=0.94 vibration=0.02
+   -> Pressure too low: check pump/leaks.
+2024-06-03 22:05:00 | score=100.0 | severity=high | sensors=vibration | temp=47.8 pressure=1.01 vibration=0.13
+   -> Excessive vibration: inspect bearings/alignment.
+2024-06-03 23:30:00 | score=100.0 | severity=high | sensors=temp,pressure,vibration | temp=38.5 pressure=0.94 vibration=0.12
+   -> Temperature too low: check heater/set-point. | Pressure too low: check pump/leaks. | Excessive vibration: inspect bearings/alignment.
+2024-06-03 23:45:00 | score=100.0 | severity=high | sensors=pressure,vibration | temp=47.4 pressure=0.96 vibration=0.1
+   -> Pressure too low: check pump/leaks. | Excessive vibration: inspect bearings/alignment.
+2024-06-04 04:05:00 | score=51.4 | severity=medium | sensors=temp | temp=41.1 pressure=1.02 vibration=0.03
+   -> Temperature too low: check heater/set-point.
+2024-06-04 05:00:00 | score=100.0 | severity=high | sensors=temp,pressure | temp=57.6 pressure=0.9 vibration=0.02
+   -> Temperature critically high: inspect cooling system. | Pressure too low: check pump/leaks.
+2024-06-04 05:05:00 | score=71.2 | severity=medium | sensors=temp | temp=57.2 pressure=1.0 vibration=0.04
+   -> Temperature critically high: inspect cooling system.
+2024-06-04 05:55:00 | score=66.4 | severity=medium | sensors=temp | temp=38.6 pressure=1.03 vibration=0.03
+   -> Temperature too low: check heater/set-point.
+2024-06-04 06:10:00 | score=100.0 | severity=high | sensors=temp,pressure,vibration | temp=54.4 pressure=1.13 vibration=0.12
+   -> Temperature critically high: inspect cooling system. | Pressure too high: inspect relief valve. | Excessive vibration: inspect bearings/alignment.
+2024-06-04 07:10:00 | score=100.0 | severity=high | sensors=pressure,vibration | temp=46.7 pressure=1.12 vibration=0.13
+   -> Pressure too high: inspect relief valve. | Excessive vibration: inspect bearings/alignment.
+2024-06-04 07:20:00 | score=96.8 | severity=high | sensors=temp,pressure | temp=54.8 pressure=0.96 vibration=0.04
+   -> Temperature critically high: inspect cooling system. | Pressure too low: check pump/leaks.
+2024-06-04 08:40:00 | score=70.0 | severity=medium | sensors=pressure | temp=47.9 pressure=0.92 vibration=0.03
+   -> Pressure too low: check pump/leaks.
+2024-06-04 09:55:00 | score=100.0 | severity=high | sensors=temp,vibration | temp=38.3 pressure=1.03 vibration=0.14
+   -> Temperature too low: check heater/set-point. | Excessive vibration: inspect bearings/alignment.
+2024-06-04 10:55:00 | score=100.0 | severity=high | sensors=temp,pressure | temp=42.0 pressure=1.13 vibration=0.02
+   -> Temperature too low: check heater/set-point. | Pressure too high: inspect relief valve.
+2024-06-04 11:10:00 | score=100.0 | severity=high | sensors=temp,pressure,vibration | temp=54.0 pressure=1.13 vibration=0.12
+   -> Temperature critically high: inspect cooling system. | Pressure too high: inspect relief valve. | Excessive vibration: inspect bearings/alignment.
+2024-06-04 12:05:00 | score=100.0 | severity=high | sensors=temp,vibration | temp=41.8 pressure=1.03 vibration=0.11
+   -> Temperature too low: check heater/set-point. | Excessive vibration: inspect bearings/alignment.
+2024-06-04 12:25:00 | score=100.0 | severity=high | sensors=temp,pressure,vibration | temp=56.5 pressure=1.12 vibration=0.11
+   -> Temperature critically high: inspect cooling system. | Pressure too high: inspect relief valve. | Excessive vibration: inspect bearings/alignment.
+2024-06-04 12:35:00 | score=70.0 | severity=medium | sensors=pressure | temp=47.4 pressure=1.13 vibration=0.04
+   -> Pressure too high: inspect relief valve.
+2024-06-04 13:05:00 | score=100.0 | severity=high | sensors=pressure,vibration | temp=45.2 pressure=1.15 vibration=0.1
+   -> Pressure too high: inspect relief valve. | Excessive vibration: inspect bearings/alignment.
+2024-06-04 13:45:00 | score=100.0 | severity=high | sensors=temp,pressure,vibration | temp=53.1 pressure=1.16 vibration=0.13
+   -> Temperature critically high: inspect cooling system. | Pressure too high: inspect relief valve. | Excessive vibration: inspect bearings/alignment.
+2024-06-04 14:15:00 | score=47.8 | severity=low | sensors=temp | temp=53.3 pressure=1.03 vibration=0.03
+   -> Temperature critically high: inspect cooling system.
+2024-06-04 14:45:00 | score=100.0 | severity=high | sensors=temp,vibration | temp=40.1 pressure=1.02 vibration=0.09
+   -> Temperature too low: check heater/set-point. | Excessive vibration: inspect bearings/alignment.
+2024-06-04 15:15:00 | score=94.0 | severity=high | sensors=pressure | temp=47.8 pressure=1.17 vibration=0.04
+   -> Pressure too high: inspect relief valve.
+2024-06-04 15:30:00 | score=55.6 | severity=medium | sensors=temp | temp=54.6 pressure=1.03 vibration=0.03
+   -> Temperature critically high: inspect cooling system.
+2024-06-04 17:45:00 | score=50.2 | severity=medium | sensors=temp | temp=53.7 pressure=1.01 vibration=0.04
+   -> Temperature critically high: inspect cooling system.
+2024-06-04 18:00:00 | score=70.0 | severity=medium | sensors=pressure | temp=47.6 pressure=1.13 vibration=0.03
+   -> Pressure too high: inspect relief valve.
+2024-06-04 18:55:00 | score=74.8 | severity=medium | sensors=temp | temp=57.8 pressure=1.02 vibration=0.02
+   -> Temperature critically high: inspect cooling system.
+2024-06-04 19:45:00 | score=100.0 | severity=high | sensors=pressure,vibration | temp=46.0 pressure=0.95 vibration=0.1
+   -> Pressure too low: check pump/leaks. | Excessive vibration: inspect bearings/alignment.
+
+Alerts saved to: outputs\alerts.csv
